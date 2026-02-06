@@ -1,20 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import PersonsList from './components/PersonsList'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phone_number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', phone_number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', phone_number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', phone_number: '39-23-6423122', id: 4 }
-  ])
-
-  const [displayList, setDisplayList] = useState(persons)
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newPhoneNumber, setNewPhoneNumber] = useState('')
   const [nameFilter, setNameFilter] = useState('')
+
+  const displayList = persons.filter(person =>
+    person.name.toLowerCase().includes(nameFilter.toLowerCase())
+  ) 
+
+   useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }, [])
 
   const handleAddPhoneBook = (event) => {
     event.preventDefault()
@@ -29,11 +37,6 @@ const App = () => {
         }
         const updatedPersons = persons.concat(newPerson)
         setPersons(updatedPersons)
-      const results = updatedPersons.filter(person =>
-          person.name.toLowerCase().includes(nameFilter.toLowerCase())
-        );
-      setDisplayList(results)
-        
     }    
     setNewName('')
     setNewPhoneNumber('')
@@ -48,14 +51,8 @@ const App = () => {
     setNewPhoneNumber(event.target.value)
   }
 
-
   const handleNameFilterChange = (event) => {
-    const searchName = event.target.value
     setNameFilter(event.target.value)
-    const results = persons.filter(person =>
-      person.name.toLowerCase().includes(searchName.toLowerCase())
-    );
-    setDisplayList(results)
   }
 
 
