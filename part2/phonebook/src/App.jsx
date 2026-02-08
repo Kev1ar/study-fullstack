@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import PersonsList from './components/PersonsList'
+import Notification from './components/Notification'
+
 import personService from './services/persons'
+
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newPhoneNumber, setNewPhoneNumber] = useState('')
   const [nameFilter, setNameFilter] = useState('')
+  const [notificationMessage, setNotificationMessage] = useState(null)
 
   const displayList = persons.filter(person =>
     person.name.toLowerCase().includes(nameFilter.toLowerCase())
@@ -58,6 +61,7 @@ const App = () => {
             setPersons(persons.concat(returnedPerson))
             setNewName('')
             setNewPhoneNumber('')
+            setNotificationMessage(`Added '${newPerson.name}'` )
           })
     }    
     
@@ -87,6 +91,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notificationMessage} />
       <Filter 
         value={nameFilter} 
         onChange={handleNameFilterChange}
