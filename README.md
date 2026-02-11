@@ -1,83 +1,74 @@
-Here’s a clean and simple README tailored specifically for a Full Stack Open study repository 👇
+# Full Stack Open -- Course Repository
 
-Full Stack Open – Course Repository
+This repository contains my solutions and projects completed while
+studying the **Full Stack Open** course by the University of Helsinki.
 
-This repository contains my solutions, exercises, and projects completed while studying the Full Stack Open course by the University of Helsinki.
+The course focuses on modern full-stack web development using
+JavaScript, React, Node.js, Express, and MongoDB.
 
-The course focuses on modern web development using JavaScript, React, Node.js, Express, MongoDB, and related technologies.
+------------------------------------------------------------------------
 
-📚 About the Course
+## 📚 About the Course
 
-Full Stack Open covers:
+Full Stack Open covers topics including:
 
-React
+-   React
+-   State management
+-   Node.js & Express
+-   REST APIs
+-   MongoDB
+-   Testing
+-   Authentication & authorization
+-   CI/CD
+-   TypeScript
+-   GraphQL (optional sections)
 
-State management
+Official course website: https://fullstackopen.com/
 
-Node.js & Express
+------------------------------------------------------------------------
 
-REST APIs
-
-MongoDB
-
-Testing
-
-Authentication & authorization
-
-CI/CD
-
-TypeScript (later parts)
-
-GraphQL (optional parts)
-
-More info: https://fullstackopen.com/
-
-📁 Repository Structure
+## 📁 Repository Structure
 
 Each part of the course is organized into its own folder:
 
-part0/
-part1/
-part2/
-part3/
-part4/
-...
+    part0/
+    part1/
+    part2/
+    part3/
+    
+Some parts contain both frontend and backend applications.
 
+------------------------------------------------------------------------
 
-Each folder contains the exercises and projects completed for that section.
+## 🚀 Running Projects
 
-Some parts include both frontend and backend applications.
+Navigate to the specific project folder:
 
-🚀 How to Run a Project
-
-Navigate to the specific part/project folder:
-
-cd partX/project-name
-
+    cd partX/project-name
 
 Install dependencies:
 
-npm install
+    npm install
 
+Start the development server:
 
-Start development server:
+    npm run dev
 
-npm run dev
+(For backend projects, use `npm start` or `npm run dev` depending on the
+setup.)
 
+------------------------------------------------------------------------
 
-(For backend projects, use npm start or npm run dev depending on the setup.)
+## 🎯 Purpose
 
-🎯 Purpose of This Repository
+-   Track my progress through the course
+-   Practice modern full-stack development
+-   Strengthen backend and frontend fundamentals
+-   Build a strong foundation for software engineering roles
 
-Track my progress through the course
+------------------------------------------------------------------------
 
-Practice full-stack development
+## 👨‍💻 Author
 
-Strengthen understanding of modern web technologies
-
-Build a solid foundation for real-world software engineering
-
-🧑‍💻 Author
-
-Kevin La
+Kevin La\
 Software Engineering Student
