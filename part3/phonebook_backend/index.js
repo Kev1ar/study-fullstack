@@ -26,26 +26,26 @@ app.use(morgan (
 ))
 
 let persons = [
-    { 
-      "id": "1",
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": "2",
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": "3",
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": "4",
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
+  {
+    'id': '1',
+    'name': 'Arto Hellas',
+    'number': '040-123456'
+  },
+  {
+    'id': '2',
+    'name': 'Ada Lovelace',
+    'number': '39-44-5323523'
+  },
+  {
+    'id': '3',
+    'name': 'Dan Abramov',
+    'number': '12-43-234345'
+  },
+  {
+    'id': '4',
+    'name': 'Mary Poppendieck',
+    'number': '39-23-6423122'
+  }
 ]
 
 app.get('/api/persons', (request, response) => {
@@ -55,49 +55,49 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
-    Contact.findById(request.params.id)
-      .then(contact => {
-        if (!contact) {
-          return response.status(404).json({ error: 'contact not found' })
-        }
+  Contact.findById(request.params.id)
+    .then(contact => {
+      if (!contact) {
+        return response.status(404).json({ error: 'contact not found' })
+      }
 
-        response.json(contact)
-      })
-      .catch(error => next(error))
+      response.json(contact)
+    })
+    .catch(error => next(error))
 })
 
 
 app.post('/api/persons', (request, response, next) => {
-    const body = request.body
-    if (!body.name || !body.number) {
-        return response.status(400).json({ 
-            error: 'name or number missing' 
-        })
-    }
-
-    // if(persons.find(person => person.name === body.name)){
-    //     return response.status(400).json({ 
-    //         error: 'name must be unique' 
-    //     })
-    // }
-    
-    const newContact = new Contact({
-        name: body.name,
-        number: body.number
+  const body = request.body
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: 'name or number missing'
     })
+  }
 
-    newContact.save().then(savedContact => {
-      response.json(savedContact)
-    }).catch(error => next(error))
+  // if(persons.find(person => person.name === body.name)){
+  //     return response.status(400).json({
+  //         error: 'name must be unique'
+  //     })
+  // }
+
+  const newContact = new Contact({
+    name: body.name,
+    number: body.number
+  })
+
+  newContact.save().then(savedContact => {
+    response.json(savedContact)
+  }).catch(error => next(error))
 })
 
 app.get('/info', (request, response) => {
-  const requestTime = new Date();
-  console.log(requestTime);
+  const requestTime = new Date()
+  console.log(requestTime)
   response.send(`
     <p>Phonebook has info for ${persons.length}</p>
     <p>${requestTime}</p>
-    `);
+    `)
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -119,9 +119,9 @@ app.put('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
   Contact.findByIdAndDelete(request.params.id)
-     .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
