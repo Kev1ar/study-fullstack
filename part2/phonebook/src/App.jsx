@@ -12,20 +12,21 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newPhoneNumber, setNewPhoneNumber] = useState('')
   const [nameFilter, setNameFilter] = useState('')
+
   const [notificationMessage, setNotificationMessage] = useState(null)
+  const [notificationType, setNotificationType] = useState('success')
 
-  const displayList = persons.filter(person =>
-    person.name.toLowerCase().includes(nameFilter.toLowerCase())
-  ) 
-
-   useEffect(() => {
-    console.log('effect')
+  useEffect(() => {
     personService
       .getAll()
       .then(updatedPersons => {
         setPersons(updatedPersons)
       })
   }, [])
+
+    const displayList = persons.filter(person =>
+      person.name.toLowerCase().includes(nameFilter.toLowerCase())
+    ) 
 
   const handleAddPhoneBook = (event) => {
     event.preventDefault()
@@ -61,7 +62,13 @@ const App = () => {
             setPersons(persons.concat(returnedPerson))
             setNewName('')
             setNewPhoneNumber('')
+            setNotificationType('success')
             setNotificationMessage(`Added '${newPerson.name}'` )
+          })
+          .catch(error => {
+            setNotificationType('error')
+            setNotificationMessage(error.response.data.error)
+            console.log(error.response.data.error)
           })
     }    
     
@@ -91,7 +98,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notificationMessage} />
+      <Notification message={notificationMessage} type={notificationType} />
       <Filter 
         value={nameFilter} 
         onChange={handleNameFilterChange}
