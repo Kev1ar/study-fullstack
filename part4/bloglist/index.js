@@ -12,7 +12,7 @@ const blogSchema = mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-const mongoUrl = 'mongodb://localhost/bloglist'
+const mongoUrl = 'mongodb+srv://kaiser-of-code:4BeExC9DCEVuffiW@dev-cluster.io9zcjr.mongodb.net/blogApp?retryWrites=true&w=majority&appName=dev-cluster'
 mongoose.connect(mongoUrl, { family: 4 })
 
 app.use(express.json())
@@ -25,7 +25,7 @@ app.get('/api/blogs', (request, response) => {
 
 app.post('/api/blogs', (request, response) => {
   const blog = new Blog(request.body)
-
+  console.log(blog)
   blog.save().then((result) => {
     response.status(201).json(result)
   })
